@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Secure Checkout | Cascara India – Premium Coffee Husk Tea</title>
+  <meta name="description" content="Secure checkout for Cascara India. Place your order for premium coffee husk tea." />
+  <meta name="robots" content="noindex,nofollow" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body { padding-top: 80px; }
+    .checkout-wrap {
+      max-width: 860px; margin: 40px auto;
+      display: grid; grid-template-columns: 1fr; gap: 30px;
+    }
+    @media(min-width: 768px) { .checkout-wrap { grid-template-columns: 1.3fr 1fr; } }
+    .checkout-form-container, .checkout-summary {
+      background: var(--surface); padding: 30px;
+      border: 1px solid var(--border); border-radius: 12px;
+    }
+    .checkout-summary h3 { font-family: var(--font-heading); color: var(--accent); margin-bottom: 20px; }
+    .checkout-items { list-style: none; margin-bottom: 20px; border-bottom: 1px solid var(--border); padding-bottom: 10px; }
+    .checkout-item { display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 0.9rem; }
+    .checkout-total { display: flex; justify-content: space-between; font-weight: 600; font-size: 1.1rem; color: var(--text-heading); }
+    .gateway-title { font-family: var(--font-heading); color: var(--accent); margin-bottom: 25px; text-align: center; font-size: 1.8rem; }
+    .form-group.half-width { display: inline-block; width: calc(50% - 10px); }
+    .form-group.half-width:nth-child(even) { margin-left: 15px; }
+
+    #checkout-success {
+      display: none; text-align: center; padding: 60px 20px;
+    }
+    #checkout-success .success-icon { font-size: 4rem; margin-bottom: 16px; }
+    #checkout-success h2 { font-family: var(--font-heading); color: var(--accent); margin-bottom: 12px; font-size: 2rem; }
+    #checkout-success p { color: var(--text-body); margin-bottom: 10px; }
+    #checkout-success .order-id-badge {
+      display: inline-block; background: #f0f9f0; color: #2a7c6f;
+      border: 1px solid #b2dfdb; border-radius: 8px;
+      padding: 10px 20px; font-weight: 600; font-size: 0.95rem;
+      margin: 12px 0 24px;
+    }
+    .checkout-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 8px; }
+  </style>
+</head>
+<body>
+
+  <!-- NAVIGATION -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">
+        <img src="cascara_logo.png" alt="Cascara India Logo" id="logo-img" />
+      </a>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="index.html#about" class="nav-link">Our Story</a></li>
+        <li><a href="products.html" class="nav-link">Products</a></li>
+        <li><a href="brew.html" class="nav-link">How to Brew</a></li>
+        <li><a href="reviews.html" class="nav-link">Reviews</a></li>
+        <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+      </ul>
+      <div class="nav-actions">
+        <a href="products.html" style="color:var(--text-heading);text-decoration:none;font-size:0.9rem;">← Continue Shopping</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- CHECKOUT SECTION -->
+  <section class="section" id="checkout-section">
+    <div class="container">
+
+      <!-- SUCCESS SCREEN (hidden until order placed) -->
+      <div id="checkout-success">
+        <div class="success-icon">🎉</div>
+        <h2>Order Confirmed!</h2>
+        <p>Thank you for choosing Cascara India. Your order has been placed successfully.</p>
+        <div class="order-id-badge" id="order-id-text">Processing...</div>
+        <p style="font-size:0.9rem;color:#9B7B63;">A confirmation will be sent to your email shortly.</p>
+        <div class="checkout-actions">
+          <a href="orders.html" class="btn btn-primary">View My Orders</a>
+          <a href="index.html" class="btn btn-secondary" style="background:transparent;border:1.5px solid var(--accent);color:var(--accent);">Return Home</a>
+        </div>
+      </div>
+
+      <!-- CHECKOUT FORM -->
+      <div class="checkout-wrap" id="checkout-wrap">
+
+        <!-- Left: Form -->
+        <div class="checkout-form-container">
+          <h2 class="gateway-title">Secure Checkout</h2>
+          <form id="payment-form" onsubmit="processPayment(event)" novalidate>
+
+            <h4 style="margin-bottom:15px;color:var(--text-heading);">📦 Shipping Details</h4>
+
+            <div class="form-group">
+              <label for="shipping-name">Full Name *</label>
+              <input type="text" id="shipping-name" placeholder="Priya Sharma" required />
+            </div>
+            <div class="form-group">
+              <label for="shipping-email">Email Address *</label>
+              <input type="email" id="shipping-email" placeholder="you@email.com" required />
+            </div>
+            <div class="form-group">
+              <label for="shipping-phone">Phone Number</label>
+              <input type="tel" id="shipping-phone" placeholder="+91 98765 43210" />
+            </div>
+            <div class="form-group">
+              <label for="shipping-address">Address *</label>
+              <input type="text" id="shipping-address" placeholder="123 Coffee Estate Road" required />
+            </div>
+            <div class="form-group half-width">
+              <label for="shipping-city">City *</label>
+              <input type="text" id="shipping-city" placeholder="Bengaluru" required />
+            </div>
+            <div class="form-group half-width">
+              <label for="shipping-pin">PIN Code *</label>
+              <input type="text" id="shipping-pin" placeholder="560001" pattern="[0-9]{6}" required />
+            </div>
+
+            <h4 style="margin-top:25px;margin-bottom:15px;color:var(--text-heading);">💳 Payment (Demo)</h4>
+            <div class="form-group">
+              <label for="card-name">Name on Card</label>
+              <input type="text" id="card-name" placeholder="Priya Sharma" />
+            </div>
+            <div class="form-group">
+              <label for="card-number">Card Number</label>
+              <input type="text" id="card-number" placeholder="XXXX XXXX XXXX XXXX" />
+            </div>
+            <div class="form-group half-width">
+              <label for="card-expiry">Expiry</label>
+              <input type="text" id="card-expiry" placeholder="MM/YY" />
+            </div>
+            <div class="form-group half-width">
+              <label for="card-cvv">CVV</label>
+              <input type="text" id="card-cvv" placeholder="123" />
+            </div>
+
+            <button type="submit" class="btn btn-primary full-width" style="margin-top:20px;" id="pay-btn">
+              🔒 Place Order
+            </button>
+          </form>
+        </div>
+
+        <!-- Right: Order Summary -->
+        <div class="checkout-summary">
+          <h3>Order Summary</h3>
+          <ul class="checkout-items" id="checkout-summary-items"></ul>
+          <div class="checkout-total">
+            <span>Total</span>
+            <span id="checkout-summary-total">₹0</span>
+          </div>
+          <p style="font-size:0.78rem;color:#9B7B63;margin-top:16px;text-align:center;">
+            🔒 Secured by Cascara India · Demo Payment
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <img src="cascara_logo.png" alt="Cascara India" class="footer-logo" />
+          <p>India's first premium coffee husk tea brand — brewed from tradition, crafted with love.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="products.html">Products</a></li>
+            <li><a href="orders.html">My Orders</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2025 Cascara India. All rights reserved. Made with ❤️ in India.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+  <script>
+    /* ═══════════════════════════════════════
+       API Base URL
+       ═══════════════════════════════════════ */
+    const IS_LOCAL = ['localhost','127.0.0.1'].includes(window.location.hostname)
+                  || window.location.protocol === 'file:';
+    const API = IS_LOCAL ? 'http://localhost:5000/api' : '/api';
+
+    /* ═══════════════════════════════════════
+       ON PAGE LOAD
+       ═══════════════════════════════════════ */
+    document.addEventListener('DOMContentLoaded', () => {
+      renderCheckoutSummary();
+
+      // Pre-fill for logged-in user
+      try {
+        const user = JSON.parse(localStorage.getItem('cascara-user') || 'null');
+        if (user) {
+          if (user.name)  document.getElementById('shipping-name').value  = user.name;
+          if (user.email) document.getElementById('shipping-email').value = user.email;
+        }
+      } catch(e) { /* ignore */ }
+    });
+
+    /* ═══════════════════════════════════════
+       RENDER ORDER SUMMARY
+       ═══════════════════════════════════════ */
+    function renderCheckoutSummary() {
+      const summaryItems = document.getElementById('checkout-summary-items');
+      const summaryTotal = document.getElementById('checkout-summary-total');
+      const localCart    = JSON.parse(localStorage.getItem('cascara-cart') || '[]');
+
+      if (localCart.length === 0) {
+        summaryItems.innerHTML = '<li style="color:#9B7B63;padding:8px 0;">Your cart is empty. <a href="products.html">Shop now →</a></li>';
+        document.getElementById('pay-btn').disabled = true;
+        document.getElementById('pay-btn').style.opacity = '0.5';
+        return;
+      }
+
+      let total = 0;
+      summaryItems.innerHTML = localCart.map(item => {
+        const itemTotal = item.price * item.qty;
+        total += itemTotal;
+        return `<li class="checkout-item">
+          <span>${item.qty}× ${item.name}</span>
+          <span>₹${itemTotal.toLocaleString('en-IN')}</span>
+        </li>`;
+      }).join('');
+      summaryTotal.textContent = `₹${total.toLocaleString('en-IN')}`;
+    }
+
+    /* ═══════════════════════════════════════
+       SHOW INLINE ERROR
+       ═══════════════════════════════════════ */
+    function showCheckoutError(msg) {
+      let box = document.getElementById('checkout-error');
+      if (!box) {
+        box = document.createElement('div');
+        box.id = 'checkout-error';
+        box.style.cssText = 'background:#fdecea;color:#c0392b;border:1px solid #f5c6cb;border-radius:8px;padding:14px 18px;margin-bottom:18px;font-size:0.92rem;font-weight:500;';
+        document.getElementById('payment-form').prepend(box);
+      }
+      box.textContent = '❌ ' + msg;
+      box.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    /* ═══════════════════════════════════════
+       PROCESS PAYMENT
+       ═══════════════════════════════════════ */
+    async function processPayment(e) {
+      e.preventDefault();
+
+      const btn = document.getElementById('pay-btn');
+      btn.textContent = '⏳ Placing Order...';
+      btn.disabled    = true;
+
+      // Remove previous error
+      const oldErr = document.getElementById('checkout-error');
+      if (oldErr) oldErr.remove();
+
+      try {
+        /* 1. Cart check */
+        const localCart = JSON.parse(localStorage.getItem('cascara-cart') || '[]');
+        if (localCart.length === 0) {
+          showCheckoutError('Your cart is empty. Add products before checking out.');
+          return;
+        }
+
+        /* 2. Form fields */
+        const name    = document.getElementById('shipping-name').value.trim();
+        const email   = document.getElementById('shipping-email').value.trim();
+        const phone   = document.getElementById('shipping-phone')?.value.trim() || '';
+        const address = document.getElementById('shipping-address').value.trim();
+        const city    = document.getElementById('shipping-city').value.trim();
+        const pincode = document.getElementById('shipping-pin').value.trim();
+
+        /* 3. Validation */
+        if (!name)    { showCheckoutError('Full name is required.');          return; }
+        if (!email)   { showCheckoutError('Email address is required.');      return; }
+        if (!address) { showCheckoutError('Shipping address is required.');   return; }
+        if (!city)    { showCheckoutError('City is required.');               return; }
+        if (!pincode) { showCheckoutError('PIN code is required.');           return; }
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+          showCheckoutError('Please enter a valid email address.');
+          return;
+        }
+
+        /* 4. Build payload */
+        const total = localCart.reduce((s, i) => s + i.price * i.qty, 0);
+        const items = localCart.map(i => ({
+          productId: i.id || i.productId || 'unknown',
+          name:  i.name,
+          price: Number(i.price),
+          qty:   Number(i.qty),
+          img:   i.img || ''
+        }));
+
+        const token   = localStorage.getItem('cascara-token');
+        const headers = { 'Content-Type': 'application/json' };
+        if (token) headers['Authorization'] = `Bearer ${token}`;
+
+        /* 5. POST order */
+        const res  = await fetch(`${API}/orders`, {
+          method: 'POST',
+          headers,
+          body: JSON.stringify({ name, email, phone, address, city, pincode, items, total, paymentMethod: 'card' })
+        });
+
+        let data;
+        try { data = await res.json(); }
+        catch(e) { throw new Error(`Server returned invalid response (status ${res.status})`); }
+
+        if (!res.ok) {
+          showCheckoutError(data.message || `Server error ${res.status}. Please try again.`);
+          return;
+        }
+
+        /* 6. SUCCESS */
+        document.getElementById('checkout-wrap').style.display  = 'none';
+        document.getElementById('checkout-success').style.display = 'block';
+        document.getElementById('order-id-text').textContent = `Order ID: ${data.orderId}`;
+
+        // Clear cart from localStorage
+        localStorage.removeItem('cascara-cart');
+        if (typeof renderCart === 'function') { window.cart = []; renderCart(); }
+
+      } catch (err) {
+        console.error('[checkout] Error:', err);
+        showCheckoutError(`Network error: ${err.message}. Make sure the backend is running on port 5000.`);
+      } finally {
+        btn.textContent = '🔒 Place Order';
+        btn.disabled    = false;
+      }
+    }
+  </script>
+</body>
+</html>

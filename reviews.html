@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Customer Reviews | Cascara India – Premium Coffee Husk Tea</title>
+  <meta name="description" content="Read what our customers are saying about Cascara India. Leave a review and share your experience." />
+  <link rel="canonical" href="https://cascaraindia.in/reviews.html" />
+  <meta property="og:title" content="Customer Reviews | Cascara India" />
+  <meta property="og:description" content="Hundreds of happy customers love Cascara India's premium coffee husk tea." />
+  <meta property="og:image" content="https://cascaraindia.in/cascara_hero.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body { padding-top: 80px; }
+  </style>
+</head>
+<body>
+<a href="#reviews" class="skip-nav">Skip to reviews</a>
+
+  <!-- ===== NAVIGATION ===== -->
+  <nav class="navbar always-dark" id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">
+        <img src="cascara_logo.png" alt="Cascara India Logo" id="logo-img" />
+      </a>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="index.html#about" class="nav-link">Our Story</a></li>
+        <li><a href="products.html" class="nav-link">Products</a></li>
+        <li><a href="brew.html" class="nav-link">How to Brew</a></li>
+        <li><a href="reviews.html" class="nav-link active">Reviews</a></li>
+        <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button class="cart-btn" id="cart-btn" aria-label="Shopping Cart">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z" />
+            <line x1="3" y1="6" x2="21" y2="6" />
+            <path d="M16 10a4 4 0 01-8 0" />
+          </svg>
+          <span class="cart-count" id="cart-count">0</span>
+        </button>
+        <button class="hamburger" id="hamburger" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ===== REVIEWS ===== -->
+  <section class="reviews section" id="reviews">
+    <div class="container">
+      <p class="section-eyebrow center">Customer Love</p>
+      <h2 class="section-title center">What Our Customers Say</h2>
+
+      <div class="reviews-grid" id="reviews-grid">
+        <!-- Reviews injected by JS -->
+      </div>
+
+      <!-- Leave a Review -->
+      <div class="review-form-wrap">
+        <h3 class="form-title">Share Your Experience</h3>
+        <form class="review-form" id="review-form" onsubmit="submitReview(event)">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="reviewer-name">Your Name</label>
+              <input type="text" id="reviewer-name" placeholder="e.g. Priya S." required />
+            </div>
+            <div class="form-group">
+              <label for="reviewer-product">Product</label>
+              <select id="reviewer-product">
+                <option value="Sachet Box">Cascara Sachet Box</option>
+                <option value="50g Pack">50g Loose Leaf Pack</option>
+                <option value="5g Sachet">Single Serve Sachet</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Rating</label>
+            <div class="star-picker" id="star-picker">
+              <span class="star" data-val="1">★</span>
+              <span class="star" data-val="2">★</span>
+              <span class="star" data-val="3">★</span>
+              <span class="star" data-val="4">★</span>
+              <span class="star" data-val="5">★</span>
+            </div>
+            <input type="hidden" id="star-value" value="5" />
+          </div>
+          <div class="form-group">
+            <label for="reviewer-text">Your Review</label>
+            <textarea id="reviewer-text" rows="4" placeholder="Tell us about your experience with Cascara India..."
+              required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary" id="submit-review-btn">Post Review</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <img src="cascara_logo.png" alt="Cascara India" class="footer-logo" />
+          <p>India's first premium coffee husk tea brand — brewed from tradition, crafted with love.</p>
+          <div class="social-links">
+            <a href="#" aria-label="Instagram" class="social-link" id="footer-instagram">📷</a>
+            <a href="#" aria-label="Facebook" class="social-link" id="footer-facebook">📘</a>
+            <a href="#" aria-label="YouTube" class="social-link" id="footer-youtube">▶️</a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="index.html#about">Our Story</a></li>
+            <li><a href="products.html">Products</a></li>
+            <li><a href="brew.html">Brew Guide</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Products</h4>
+          <ul>
+            <li><a href="products.html">Sachet Box – ₹300</a></li>
+            <li><a href="products.html">50g Pack – ₹130</a></li>
+            <li><a href="products.html">Single Sachet – ₹15</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <ul>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Return Policy</a></li>
+            <li><a href="#">Shipping Info</a></li>
+            <li><a href="#">Terms of Use</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2025 Cascara India. All rights reserved. Made with ❤️ in India.</p>
+        <p class="footer-note">FSSAI Licensed | Ships Pan-India</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===== CART DRAWER ===== -->
+  <div class="cart-overlay" id="cart-overlay" onclick="closeCart()"></div>
+  <aside class="cart-drawer" id="cart-drawer">
+    <div class="cart-header">
+      <h3>Your Cart</h3>
+      <button class="cart-close" id="cart-close-btn" onclick="closeCart()" aria-label="Close Cart">✕</button>
+    </div>
+    <div class="cart-body" id="cart-body">
+      <div class="cart-empty" id="cart-empty">
+        <span>🛒</span>
+        <p>Your cart is empty.</p>
+        <a href="products.html" onclick="closeCart()" class="btn btn-primary">Shop Now</a>
+      </div>
+      <ul class="cart-items" id="cart-items"></ul>
+    </div>
+    <div class="cart-footer" id="cart-footer" style="display:none;">
+      <div class="cart-total">
+        <span>Total</span>
+        <span id="cart-total-price">₹0</span>
+      </div>
+      <button class="btn btn-primary full-width" id="checkout-btn" onclick="checkout()">Proceed to Checkout</button>
+    </div>
+  </aside>
+
+  <!-- ===== TOAST ===== -->
+  <div class="toast" id="toast"></div>
+
+  <script src="app.js"></script>
+</body>
+
+</html>

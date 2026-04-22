@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login | Cascara India – Premium Coffee Husk Tea</title>
+  <meta name="description" content="Sign in to your Cascara India account to track orders and manage your preferences." />
+  <meta name="robots" content="noindex,nofollow" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* ── Auth Page Exclusive Styles ── */
+    body { margin: 0; padding: 0; min-height: 100vh; overflow-x: hidden; }
+
+    .auth-page {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      position: relative;
+    }
+
+    /* Left Panel — Brand Visual */
+    .auth-visual {
+      background: linear-gradient(145deg, #1A100A 0%, #3D2614 40%, #B5552B 100%);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 60px 48px;
+      overflow: hidden;
+    }
+    .auth-visual::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url('cascara_hero.png') center/cover no-repeat;
+      opacity: 0.12;
+    }
+    .auth-visual-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      max-width: 380px;
+    }
+    .auth-logo {
+      height: 64px;
+      width: auto;
+      margin: 0 auto 36px;
+      display: block;
+      filter: brightness(1.1);
+    }
+    .auth-visual h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 3.5vw, 2.8rem);
+      font-weight: 700;
+      color: #FAF6F0;
+      line-height: 1.2;
+      margin-bottom: 20px;
+    }
+    .auth-visual h2 em {
+      color: #E8C97A;
+      font-style: italic;
+    }
+    .auth-visual p {
+      font-size: 1rem;
+      color: rgba(255,255,255,0.72);
+      line-height: 1.8;
+      margin-bottom: 40px;
+    }
+    .auth-perks { display: flex; flex-direction: column; gap: 14px; text-align: left; }
+    .auth-perk {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 12px;
+      padding: 12px 18px;
+      backdrop-filter: blur(8px);
+    }
+    .auth-perk-icon { font-size: 1.3rem; flex-shrink: 0; }
+    .auth-perk span { font-size: 0.88rem; color: rgba(255,255,255,0.85); }
+    .auth-visual-bottom {
+      position: absolute;
+      bottom: 24px;
+      text-align: center;
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.4);
+    }
+    /* Decorative circles */
+    .auth-circle {
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.06;
+      background: #FAF6F0;
+    }
+    .auth-circle-1 { width: 400px; height: 400px; top: -120px; right: -100px; }
+    .auth-circle-2 { width: 240px; height: 240px; bottom: -60px; left: -60px; }
+
+    /* Right Panel — Form */
+    .auth-form-panel {
+      background: #FAF6F0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 60px 48px;
+      position: relative;
+    }
+    .auth-form-box {
+      width: 100%;
+      max-width: 420px;
+    }
+    .auth-form-header {
+      margin-bottom: 40px;
+    }
+    .auth-form-header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: #1A100A;
+      margin-bottom: 8px;
+    }
+    .auth-form-header p {
+      font-size: 0.95rem;
+      color: #9B7B63;
+    }
+    .auth-form-header p a {
+      color: #B5552B;
+      font-weight: 600;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .auth-form-header p a:hover { color: #8C3D1A; text-decoration: underline; }
+
+    /* Input groups */
+    .auth-input-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 22px;
+      position: relative;
+    }
+    .auth-input-group label {
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #3D2614;
+    }
+    .auth-input-wrap {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+    .auth-input-wrap .input-icon {
+      position: absolute;
+      left: 16px;
+      font-size: 1rem;
+      color: #9B7B63;
+      pointer-events: none;
+      transition: color 0.2s;
+    }
+    .auth-input-wrap input {
+      width: 100%;
+      padding: 14px 16px 14px 44px;
+      background: #fff;
+      border: 1.5px solid #F0E9DE;
+      border-radius: 10px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.95rem;
+      color: #1A100A;
+      outline: none;
+      transition: all 0.25s;
+    }
+    .auth-input-wrap input:focus {
+      border-color: #B5552B;
+      box-shadow: 0 0 0 3px rgba(181,85,43,0.12);
+    }
+    .auth-input-wrap input:focus + .input-icon-right,
+    .auth-input-wrap input:focus ~ .input-icon { color: #B5552B; }
+    .auth-input-wrap .toggle-pass {
+      position: absolute;
+      right: 14px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+      color: #9B7B63;
+      line-height: 1;
+      padding: 0;
+      transition: color 0.2s;
+    }
+    .auth-input-wrap .toggle-pass:hover { color: #B5552B; }
+    .auth-input-wrap input:not(:placeholder-shown):valid {
+      border-color: #2A7C6F;
+    }
+
+    .auth-options {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 28px;
+      font-size: 0.85rem;
+    }
+    .remember-me {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #6B4C35;
+      cursor: pointer;
+      user-select: none;
+    }
+    .remember-me input[type=checkbox] {
+      width: 16px;
+      height: 16px;
+      accent-color: #B5552B;
+    }
+    .forgot-link {
+      color: #B5552B;
+      font-weight: 500;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .forgot-link:hover { color: #8C3D1A; text-decoration: underline; }
+
+    .auth-btn {
+      width: 100%;
+      background: linear-gradient(135deg, #B5552B, #8C3D1A);
+      color: #FAF6F0;
+      border: none;
+      border-radius: 10px;
+      padding: 15px;
+      font-family: 'Inter', sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      letter-spacing: 0.04em;
+      transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      box-shadow: 0 4px 20px rgba(181,85,43,0.4);
+    }
+    .auth-btn::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.15), transparent);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .auth-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(181,85,43,0.5); }
+    .auth-btn:hover::before { opacity: 1; }
+    .auth-btn:active { transform: translateY(0); }
+    .auth-btn:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+      transform: none;
+    }
+    .auth-btn .btn-spinner {
+      width: 18px; height: 18px;
+      border: 2px solid rgba(255,255,255,0.4);
+      border-top-color: #fff;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      display: none;
+    }
+    .auth-btn.loading .btn-spinner { display: block; }
+    .auth-btn.loading .btn-text { display: none; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* Divider */
+    .auth-divider {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin: 28px 0;
+      color: #C8B49D;
+      font-size: 0.8rem;
+    }
+    .auth-divider::before, .auth-divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: #F0E9DE;
+    }
+
+    /* Social buttons */
+    .social-auth { display: flex; flex-direction: column; gap: 12px; }
+    .social-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      padding: 13px;
+      border: 1.5px solid #F0E9DE;
+      border-radius: 10px;
+      background: #fff;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: #3D2614;
+      cursor: pointer;
+      transition: all 0.25s;
+    }
+    .social-btn:hover { border-color: #B5552B; background: rgba(181,85,43,0.04); }
+    .social-btn svg { width: 20px; height: 20px; flex-shrink: 0; }
+
+    /* Error / success messages */
+    .auth-message {
+      padding: 12px 16px;
+      border-radius: 8px;
+      font-size: 0.88rem;
+      font-weight: 500;
+      margin-bottom: 20px;
+      display: none;
+      align-items: center;
+      gap: 10px;
+      animation: slideDown 0.3s ease;
+    }
+    @keyframes slideDown {
+      from { opacity: 0; transform: translateY(-8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .auth-message.error   { background: rgba(192,57,43,0.1); color: #c0392b; border: 1px solid rgba(192,57,43,0.2); }
+    .auth-message.success { background: rgba(42,124,111,0.1); color: #2A7C6F; border: 1px solid rgba(42,124,111,0.2); }
+    .auth-message.show    { display: flex; }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .auth-page { grid-template-columns: 1fr; }
+      .auth-visual { display: none; }
+      .auth-form-panel { padding: 40px 24px; min-height: 100vh; }
+      .auth-form-box { max-width: 100%; }
+      /* Show a mini header on mobile */
+      .auth-form-panel::before {
+        content: 'Cascara India';
+        display: block;
+        font-family: 'Playfair Display', serif;
+        font-size: 1.6rem;
+        font-weight: 700;
+        color: #B5552B;
+        text-align: center;
+        margin-bottom: 32px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Skip to main content -->
+<a href="#login-form" class="skip-nav" style="position:absolute;left:-9999px;top:4px;z-index:9999;background:#B5552B;color:#fff;padding:8px 16px;border-radius:8px;font-size:0.9rem;text-decoration:none;">Skip to form</a>
+
+<main class="auth-page" role="main">
+
+  <!-- ═══ LEFT — Brand Visual ═══ -->
+  <aside class="auth-visual" aria-hidden="true">
+    <div class="auth-circle auth-circle-1"></div>
+    <div class="auth-circle auth-circle-2"></div>
+    <div class="auth-visual-content">
+      <img src="cascara_logo.png" alt="Cascara India" class="auth-logo" />
+      <h2>Welcome back to <em>Cascara</em></h2>
+      <p>India's first premium coffee husk tea — brewed from centuries of tradition, delivered to your cup.</p>
+      <div class="auth-perks">
+        <div class="auth-perk">
+          <span class="auth-perk-icon">📦</span>
+          <span>Track your orders in real time</span>
+        </div>
+        <div class="auth-perk">
+          <span class="auth-perk-icon">💛</span>
+          <span>Save favourites &amp; reorder easily</span>
+        </div>
+        <div class="auth-perk">
+          <span class="auth-perk-icon">🌿</span>
+          <span>Exclusive member discounts &amp; early access</span>
+        </div>
+      </div>
+    </div>
+    <div class="auth-visual-bottom">© 2025 Cascara India · FSSAI Licensed</div>
+  </aside>
+
+  <!-- ═══ RIGHT — Login Form ═══ -->
+  <section class="auth-form-panel">
+    <div class="auth-form-box">
+      <div class="auth-form-header">
+        <h1>Sign In</h1>
+        <p>New to Cascara? <a href="signup.html">Create an account →</a></p>
+      </div>
+
+      <!-- Message Banner -->
+      <div class="auth-message" id="auth-message" role="alert" aria-live="polite">
+        <span id="auth-message-icon">⚠️</span>
+        <span id="auth-message-text"></span>
+      </div>
+
+      <form id="login-form" novalidate autocomplete="on">
+
+        <!-- Email -->
+        <div class="auth-input-group">
+          <label for="login-email">Email Address</label>
+          <div class="auth-input-wrap">
+            <span class="input-icon" aria-hidden="true">✉️</span>
+            <input type="email" id="login-email" name="email"
+              placeholder="your@email.com" required autocomplete="email" />
+          </div>
+        </div>
+
+        <!-- Password -->
+        <div class="auth-input-group">
+          <label for="login-password">Password</label>
+          <div class="auth-input-wrap">
+            <span class="input-icon" aria-hidden="true">🔒</span>
+            <input type="password" id="login-password" name="password"
+              placeholder="Your password" required autocomplete="current-password" minlength="6" />
+            <button type="button" class="toggle-pass" id="toggle-pass-btn" aria-label="Toggle password visibility">👁</button>
+          </div>
+        </div>
+
+        <!-- Options -->
+        <div class="auth-options">
+          <label class="remember-me">
+            <input type="checkbox" id="remember-me" />
+            Remember me
+          </label>
+          <a href="#" class="forgot-link" id="forgot-link">Forgot password?</a>
+        </div>
+
+        <button type="submit" class="auth-btn" id="login-btn">
+          <span class="btn-text">Sign In →</span>
+          <div class="btn-spinner"></div>
+        </button>
+
+      </form>
+
+      <div class="auth-divider">or continue with</div>
+
+      <div class="social-auth">
+        <button class="social-btn" type="button" id="google-btn" onclick="showMessage('Google login coming soon! Use email for now.','error')">
+          <svg viewBox="0 0 48 48" fill="none"><path d="M44.5 20H24v8.5h11.8C34.7 33.3 30.1 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.9 1.1 8.1 2.9l6.4-6.4C34.7 6.1 29.6 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20c11 0 19.5-8 19.5-20 0-1.4-.1-2.7-.5-4z" fill="#FFC107"/><path d="M6.3 14.7l7.1 5.2C15.2 16.1 19.2 13 24 13c3.1 0 5.9 1.1 8.1 2.9l6.4-6.4C34.7 6.1 29.6 4 24 4 16.3 4 9.6 8.3 6.3 14.7z" fill="#FF3D00"/><path d="M24 44c5.9 0 11-2 14.7-5.3l-6.8-5.6C29.8 34.9 27 36 24 36c-6.1 0-10.7-2.7-11.8-7.5L5.1 34C8.5 39.7 15.8 44 24 44z" fill="#4CAF50"/><path d="M44.5 20H24v8.5h11.8c-.6 2.5-2.1 4.7-4.1 6.1l6.8 5.6C42.5 36.7 44.5 30.8 44.5 24c0-1.4-.1-2.7-.5-4z" fill="#1976D2"/></svg>
+          Continue with Google
+        </button>
+      </div>
+
+      <p style="text-align:center;margin-top:32px;font-size:0.8rem;color:#9B7B63;">
+        By signing in you agree to our <a href="#" style="color:#B5552B;">Terms</a> &amp; <a href="#" style="color:#B5552B;">Privacy Policy</a>
+      </p>
+    </div>
+  </section>
+
+</main>
+
+<!-- Forgot Password Modal -->
+<div id="forgot-modal" style="display:none;position:fixed;inset:0;z-index:2000;background:rgba(26,16,10,0.6);backdrop-filter:blur(4px);align-items:center;justify-content:center;">
+  <div style="background:#FAF6F0;border-radius:20px;padding:40px;max-width:420px;width:90%;position:relative;animation:slideDown 0.3s ease;">
+    <button onclick="closeForgot()" style="position:absolute;top:16px;right:16px;background:#F0E9DE;border:none;width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:1rem;" aria-label="Close">✕</button>
+    <h3 style="font-family:'Playfair Display',serif;font-size:1.5rem;color:#1A100A;margin-bottom:8px;">Reset Password</h3>
+    <p style="color:#9B7B63;font-size:0.9rem;margin-bottom:24px;">Enter your email and we'll send you a reset OTP.</p>
+    <div class="auth-input-group">
+      <label for="forgot-email">Email Address</label>
+      <div class="auth-input-wrap">
+        <span class="input-icon">✉️</span>
+        <input type="email" id="forgot-email" placeholder="your@email.com" />
+      </div>
+    </div>
+    <button class="auth-btn" id="forgot-submit-btn" onclick="submitForgot()" type="button">
+      <span class="btn-text">Send Reset OTP →</span>
+      <div class="btn-spinner"></div>
+    </button>
+    <div id="forgot-message" class="auth-message" style="margin-top:16px;margin-bottom:0;"></div>
+  </div>
+</div>
+
+<script>
+  const IS_LOCAL = ['localhost','127.0.0.1'].includes(window.location.hostname) || window.location.protocol === 'file:';
+  const API = IS_LOCAL ? 'http://localhost:5000/api' : '/api';
+
+  /* ── Redirect if already logged in ── */
+  (function() {
+    const token = localStorage.getItem('cascara-token');
+    const user  = localStorage.getItem('cascara-user');
+    if (token && user) {
+      window.location.href = 'index.html';
+    }
+  })();
+
+  /* ── Toggle password visibility ── */
+  document.getElementById('toggle-pass-btn').addEventListener('click', function() {
+    const inp = document.getElementById('login-password');
+    const isPass = inp.type === 'password';
+    inp.type = isPass ? 'text' : 'password';
+    this.textContent = isPass ? '🙈' : '👁';
+  });
+
+  /* ── Show message banner ── */
+  function showMessage(text, type = 'error') {
+    const el   = document.getElementById('auth-message');
+    const icon = document.getElementById('auth-message-icon');
+    const txt  = document.getElementById('auth-message-text');
+    icon.textContent = type === 'error' ? '⚠️' : '✅';
+    txt.textContent  = text;
+    el.className = `auth-message show ${type}`;
+    el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  /* ── Login Form Submit ── */
+  document.getElementById('login-form').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const btn      = document.getElementById('login-btn');
+    const email    = document.getElementById('login-email').value.trim();
+    const password = document.getElementById('login-password').value;
+
+    if (!email || !password) {
+      return showMessage('Please fill in all fields.', 'error');
+    }
+
+    btn.classList.add('loading');
+    btn.disabled = true;
+
+    try {
+      const res  = await fetch(`${API}/auth/login`, {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body:    JSON.stringify({ email, password })
+      });
+      const data = await res.json();
+
+      if (!res.ok) {
+        showMessage(data.message || 'Login failed. Please check your credentials.', 'error');
+        return;
+      }
+
+      // Store auth data
+      localStorage.setItem('cascara-token', data.token);
+      localStorage.setItem('cascara-user',  JSON.stringify(data.user));
+
+      showMessage(`Welcome back, ${data.user.name}! Redirecting...`, 'success');
+      setTimeout(() => {
+        const rawRedirect = new URLSearchParams(window.location.search).get('redirect') || '';
+        // Only allow safe relative paths — reject anything starting with http(s):// or //
+        const isSafeRelative = rawRedirect && !/^(https?:)?\/\//i.test(rawRedirect);
+        const redirect = isSafeRelative ? rawRedirect : 'index.html';
+        window.location.href = redirect;
+      }, 1000);
+
+    } catch (err) {
+      showMessage('Cannot connect to server. Please ensure the backend is running.', 'error');
+    } finally {
+      btn.classList.remove('loading');
+      btn.disabled = false;
+    }
+  });
+
+  /* ── Forgot Password ── */
+  document.getElementById('forgot-link').addEventListener('click', function(e) {
+    e.preventDefault();
+    const modal = document.getElementById('forgot-modal');
+    modal.style.display = 'flex';
+  });
+
+  function closeForgot() {
+    document.getElementById('forgot-modal').style.display = 'none';
+  }
+
+  async function submitForgot() {
+    const btn   = document.getElementById('forgot-submit-btn');
+    const email = document.getElementById('forgot-email').value.trim();
+    const msg   = document.getElementById('forgot-message');
+
+    if (!email) {
+      msg.textContent = 'Please enter your email.';
+      msg.className = 'auth-message show error';
+      return;
+    }
+
+    btn.classList.add('loading');
+    btn.disabled = true;
+
+    try {
+      const res  = await fetch(`${API}/auth/forgot-password`, {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body:    JSON.stringify({ email })
+      });
+      const data = await res.json();
+      msg.textContent = data.message;
+      msg.className = 'auth-message show success';
+    } catch {
+      msg.textContent = 'Server error. Please try again.';
+      msg.className = 'auth-message show error';
+    } finally {
+      btn.classList.remove('loading');
+      btn.disabled = false;
+    }
+  }
+
+  /* Close modal on backdrop click */
+  document.getElementById('forgot-modal').addEventListener('click', function(e) {
+    if (e.target === this) closeForgot();
+  });
+</script>
+</body>
+</html>

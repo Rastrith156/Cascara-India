@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shop Products | Cascara India – Premium Coffee Husk Tea</title>
+  <meta name="description" content="Cascara India offers premium coffee husk tea. Shop our sachet boxes, loose-leaf packs, and single-serve sachets." />
+  <link rel="canonical" href="https://cascaraindia.in/products.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Shop Cascara Tea Products | Cascara India" />
+  <meta property="og:description" content="Premium coffee husk tea. Sachet boxes, loose-leaf, single-serve. Ships pan-India." />
+  <meta property="og:image" content="https://cascaraindia.in/cascara_products.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body { padding-top: 80px; }
+  </style>
+</head>
+<body>
+<a href="#products" class="skip-nav">Skip to products</a>
+
+  <!-- ===== NAVIGATION ===== -->
+  <nav class="navbar always-dark" id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">
+        <img src="cascara_logo.png" alt="Cascara India Logo" id="logo-img" />
+      </a>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="index.html#about" class="nav-link">Our Story</a></li>
+        <li><a href="products.html" class="nav-link active">Products</a></li>
+        <li><a href="brew.html" class="nav-link">How to Brew</a></li>
+        <li><a href="reviews.html" class="nav-link">Reviews</a></li>
+        <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button class="cart-btn" id="cart-btn" aria-label="Shopping Cart">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z" />
+            <line x1="3" y1="6" x2="21" y2="6" />
+            <path d="M16 10a4 4 0 01-8 0" />
+          </svg>
+          <span class="cart-count" id="cart-count">0</span>
+        </button>
+        <button class="hamburger" id="hamburger" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ===== PRODUCTS ===== -->
+  <section class="products section" id="products">
+    <div class="container">
+      <p class="section-eyebrow center">Our Collection</p>
+      <h2 class="section-title center">Choose Your Cascara</h2>
+      <p class="section-sub center">Three ways to experience India's finest coffee cherry tea</p>
+
+      <div class="products-grid">
+
+        <!-- Product 1: Sachet Box -->
+        <div class="product-card" id="product-sachet-box">
+          <div class="product-badge">Best Seller</div>
+          <div class="product-img-wrap">
+            <img src="cascara_products.png" alt="Cascara Sachet Box – 50 tea bags" class="product-img" />
+          </div>
+          <div class="product-info">
+            <p class="product-category">Tea Bag Box</p>
+            <h3 class="product-name">Cascara Sachet Box</h3>
+            <p class="product-desc">50 individually wrapped tea bags of premium coffee husk. Perfect for daily brewing —
+              rich, aromatic, and effortless.</p>
+            <div class="product-detail-list">
+              <span>📦 50 Tea Bags</span>
+              <span>⏱️ Brew 5–7 min</span>
+              <span>☕ 2–3 cups / sachet</span>
+            </div>
+            <div class="product-footer">
+              <div class="product-price">
+                <span class="price-main">₹300</span>
+                <span class="price-per">₹6/bag</span>
+              </div>
+              <button class="btn btn-cart"
+                onclick="addToCart('sachet-box', 'Cascara Sachet Box (50 bags)', 300, 'cascara_products.png')">Add to
+                Cart</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 2: 50g Loose Leaf -->
+        <div class="product-card featured" id="product-loose-leaf">
+          <div class="product-badge gold">Premium Pick</div>
+          <div class="product-img-wrap">
+            <img src="cascara_products.png" alt="Cascara 50g Loose Leaf Pack" class="product-img" />
+          </div>
+          <div class="product-info">
+            <p class="product-category">Loose Leaf</p>
+            <h3 class="product-name">Aromatic Husk Infusion</h3>
+            <p class="product-desc">50g of whole dried coffee husks for the connoisseur. Steep and sip the full,
+              unfiltered complexity of Cascara at its finest.</p>
+            <div class="product-detail-list">
+              <span>🫙 50g Pouch</span>
+              <span>⏱️ Brew 8–10 min</span>
+              <span>☕ ~20 servings</span>
+            </div>
+            <div class="product-footer">
+              <div class="product-price">
+                <span class="price-main">₹130</span>
+                <span class="price-per">₹6.5/serving</span>
+              </div>
+              <button class="btn btn-cart"
+                onclick="addToCart('loose-leaf', 'Aromatic Husk Infusion (50g)', 130, 'cascara_products.png')">Add to
+                Cart</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 3: Single Sachet -->
+        <div class="product-card" id="product-single-sachet">
+          <div class="product-badge teal">Try First</div>
+          <div class="product-img-wrap">
+            <img src="cascara_products.png" alt="Cascara 5g Single Serve Sachet" class="product-img" />
+          </div>
+          <div class="product-info">
+            <p class="product-category">Single Serve</p>
+            <h3 class="product-name">Single Serve Sachet</h3>
+            <p class="product-desc">One 5g sachet — enough to experience the magic of Cascara for the very first time.
+              Great as a gift or sampler.</p>
+            <div class="product-detail-list">
+              <span>🎁 5g Sachet</span>
+              <span>⏱️ Brew 5 min</span>
+              <span>☕ 1 serving</span>
+            </div>
+            <div class="product-footer">
+              <div class="product-price">
+                <span class="price-main">₹15</span>
+                <span class="price-per">Per piece</span>
+              </div>
+              <button class="btn btn-cart"
+                onclick="addToCart('single-sachet', 'Single Serve Sachet (5g)', 15, 'cascara_products.png')">Add to
+                Cart</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <img src="cascara_logo.png" alt="Cascara India" class="footer-logo" />
+          <p>India's first premium coffee husk tea brand — brewed from tradition, crafted with love.</p>
+          <div class="social-links">
+            <a href="#" aria-label="Instagram" class="social-link" id="footer-instagram">📷</a>
+            <a href="#" aria-label="Facebook" class="social-link" id="footer-facebook">📘</a>
+            <a href="#" aria-label="YouTube" class="social-link" id="footer-youtube">▶️</a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="index.html#about">Our Story</a></li>
+            <li><a href="products.html">Products</a></li>
+            <li><a href="brew.html">Brew Guide</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Products</h4>
+          <ul>
+            <li><a href="products.html">Sachet Box – ₹300</a></li>
+            <li><a href="products.html">50g Pack – ₹130</a></li>
+            <li><a href="products.html">Single Sachet – ₹15</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <ul>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Return Policy</a></li>
+            <li><a href="#">Shipping Info</a></li>
+            <li><a href="#">Terms of Use</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2025 Cascara India. All rights reserved. Made with ❤️ in India.</p>
+        <p class="footer-note">FSSAI Licensed | Ships Pan-India</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===== CART DRAWER ===== -->
+  <div class="cart-overlay" id="cart-overlay" onclick="closeCart()"></div>
+  <aside class="cart-drawer" id="cart-drawer">
+    <div class="cart-header">
+      <h3>Your Cart</h3>
+      <button class="cart-close" id="cart-close-btn" onclick="closeCart()" aria-label="Close Cart">✕</button>
+    </div>
+    <div class="cart-body" id="cart-body">
+      <div class="cart-empty" id="cart-empty">
+        <span>🛒</span>
+        <p>Your cart is empty.</p>
+        <a href="products.html" onclick="closeCart()" class="btn btn-primary">Shop Now</a>
+      </div>
+      <ul class="cart-items" id="cart-items"></ul>
+    </div>
+    <div class="cart-footer" id="cart-footer" style="display:none;">
+      <div class="cart-total">
+        <span>Total</span>
+        <span id="cart-total-price">₹0</span>
+      </div>
+      <button class="btn btn-primary full-width" id="checkout-btn" onclick="checkout()">Proceed to Checkout</button>
+    </div>
+  </aside>
+
+  <!-- ===== TOAST ===== -->
+  <div class="toast" id="toast"></div>
+
+  <script src="app.js"></script>
+</body>
+
+</html>

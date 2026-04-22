@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+Disallow: /checkout.html
+Disallow: /login.html
+Disallow: /signup.html
+Disallow: /backend/
+
+Sitemap: https://cascaraindia.in/sitemap.xml
+
+# Cascara India — India's First Premium Coffee Husk Tea
+# https://cascaraindia.in

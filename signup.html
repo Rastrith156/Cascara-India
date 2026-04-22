@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Create Account | Cascara India – Premium Coffee Husk Tea</title>
+  <meta name="description" content="Create your Cascara India account and discover India's first premium coffee husk tea." />
+  <meta name="robots" content="noindex,nofollow" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body { margin: 0; padding: 0; min-height: 100vh; overflow-x: hidden; }
+
+    .auth-page {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      position: relative;
+    }
+
+    .auth-visual {
+      background: linear-gradient(145deg, #1A100A 0%, #3D2614 40%, #B5552B 100%);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 60px 48px;
+      overflow: hidden;
+    }
+    .auth-visual::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url('cascara_brew.png') center/cover no-repeat;
+      opacity: 0.1;
+    }
+    .auth-visual-content { position: relative; z-index: 2; text-align: center; max-width: 380px; }
+    .auth-logo { height: 64px; width: auto; margin: 0 auto 36px; display: block; }
+    .auth-visual h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      font-weight: 700; color: #FAF6F0; line-height: 1.2; margin-bottom: 20px;
+    }
+    .auth-visual h2 em { color: #E8C97A; font-style: italic; }
+    .auth-visual p { font-size: 1rem; color: rgba(255,255,255,0.72); line-height: 1.8; margin-bottom: 40px; }
+    .auth-perks { display: flex; flex-direction: column; gap: 14px; text-align: left; }
+    .auth-perk {
+      display: flex; align-items: center; gap: 14px;
+      background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 12px; padding: 12px 18px; backdrop-filter: blur(8px);
+    }
+    .auth-perk-icon { font-size: 1.3rem; flex-shrink: 0; }
+    .auth-perk span { font-size: 0.88rem; color: rgba(255,255,255,0.85); }
+    .auth-visual-bottom { position: absolute; bottom: 24px; font-size: 0.78rem; color: rgba(255,255,255,0.4); }
+    .auth-circle { position: absolute; border-radius: 50%; opacity: 0.06; background: #FAF6F0; }
+    .auth-circle-1 { width: 400px; height: 400px; top: -120px; right: -100px; }
+    .auth-circle-2 { width: 240px; height: 240px; bottom: -60px; left: -60px; }
+
+    .auth-form-panel {
+      background: #FAF6F0;
+      display: flex; flex-direction: column; justify-content: center; align-items: center;
+      padding: 48px 48px; overflow-y: auto;
+    }
+    .auth-form-box { width: 100%; max-width: 420px; }
+    .auth-form-header { margin-bottom: 32px; }
+    .auth-form-header h1 { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; color: #1A100A; margin-bottom: 8px; }
+    .auth-form-header p { font-size: 0.95rem; color: #9B7B63; }
+    .auth-form-header p a { color: #B5552B; font-weight: 600; text-decoration: none; transition: color 0.2s; }
+    .auth-form-header p a:hover { color: #8C3D1A; text-decoration: underline; }
+
+    .auth-input-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 18px; position: relative; }
+    .auth-input-group label { font-size: 0.8rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #3D2614; }
+    .auth-input-wrap { position: relative; display: flex; align-items: center; }
+    .auth-input-wrap .input-icon { position: absolute; left: 16px; font-size: 1rem; color: #9B7B63; pointer-events: none; }
+    .auth-input-wrap input {
+      width: 100%; padding: 13px 16px 13px 44px;
+      background: #fff; border: 1.5px solid #F0E9DE; border-radius: 10px;
+      font-family: 'Inter', sans-serif; font-size: 0.95rem; color: #1A100A;
+      outline: none; transition: all 0.25s;
+    }
+    .auth-input-wrap input:focus { border-color: #B5552B; box-shadow: 0 0 0 3px rgba(181,85,43,0.12); }
+    .auth-input-wrap input:not(:placeholder-shown):valid { border-color: #2A7C6F; }
+    .auth-input-wrap .toggle-pass {
+      position: absolute; right: 14px; background: none; border: none; cursor: pointer;
+      font-size: 1rem; color: #9B7B63; line-height: 1; padding: 0; transition: color 0.2s;
+    }
+    .auth-input-wrap .toggle-pass:hover { color: #B5552B; }
+
+    /* Password strength meter */
+    .pwd-strength-bar {
+      height: 4px; border-radius: 2px;
+      background: #F0E9DE;
+      margin-top: 6px;
+      overflow: hidden;
+    }
+    .pwd-strength-fill {
+      height: 100%; border-radius: 2px; width: 0%;
+      transition: width 0.4s ease, background 0.4s ease;
+    }
+    .pwd-strength-label { font-size: 0.75rem; color: #9B7B63; margin-top: 4px; }
+
+    /* OTP Step */
+    .otp-step { display: none; }
+    .otp-step.active { display: block; }
+    .signup-step { animation: fadeInUp 0.4s ease; }
+    @keyframes fadeInUp { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:translateY(0); } }
+
+    .otp-inputs {
+      display: flex; gap: 12px; justify-content: center; margin: 24px 0;
+    }
+    .otp-digit {
+      width: 52px; height: 60px;
+      border: 2px solid #F0E9DE; border-radius: 12px;
+      text-align: center; font-size: 1.6rem; font-weight: 700;
+      font-family: 'Playfair Display', serif; color: #1A100A;
+      background: #fff; outline: none; transition: all 0.25s;
+    }
+    .otp-digit:focus { border-color: #B5552B; box-shadow: 0 0 0 3px rgba(181,85,43,0.12); }
+    .otp-digit.filled { border-color: #2A7C6F; background: rgba(42,124,111,0.04); }
+
+    .resend-otp {
+      text-align: center; font-size: 0.85rem; color: #9B7B63; margin-top: 16px;
+    }
+    .resend-otp button {
+      background: none; border: none; color: #B5552B; font-weight: 600;
+      cursor: pointer; font-size: 0.85rem; transition: color 0.2s; font-family: inherit;
+    }
+    .resend-otp button:hover { color: #8C3D1A; text-decoration: underline; }
+    .resend-otp button:disabled { color: #9B7B63; cursor: not-allowed; text-decoration: none; }
+
+    .auth-btn {
+      width: 100%;
+      background: linear-gradient(135deg, #B5552B, #8C3D1A);
+      color: #FAF6F0; border: none; border-radius: 10px; padding: 15px;
+      font-family: 'Inter', sans-serif; font-size: 1rem; font-weight: 600;
+      cursor: pointer; letter-spacing: 0.04em; transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+      position: relative; overflow: hidden; display: flex; align-items: center;
+      justify-content: center; gap: 10px;
+      box-shadow: 0 4px 20px rgba(181,85,43,0.4);
+      margin-top: 4px;
+    }
+    .auth-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(181,85,43,0.5); }
+    .auth-btn:active { transform: translateY(0); }
+    .auth-btn:disabled { opacity: 0.7; cursor: not-allowed; transform: none; }
+    .auth-btn .btn-spinner {
+      width: 18px; height: 18px; border: 2px solid rgba(255,255,255,0.4);
+      border-top-color: #fff; border-radius: 50%; animation: spin 0.8s linear infinite; display: none;
+    }
+    .auth-btn.loading .btn-spinner { display: block; }
+    .auth-btn.loading .btn-text { display: none; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .auth-message {
+      padding: 12px 16px; border-radius: 8px; font-size: 0.88rem; font-weight: 500;
+      margin-bottom: 16px; display: none; align-items: center; gap: 10px;
+      animation: slideDown 0.3s ease;
+    }
+    @keyframes slideDown { from { opacity:0; transform:translateY(-8px); } to { opacity:1; transform:translateY(0); } }
+    .auth-message.error   { background: rgba(192,57,43,0.1); color: #c0392b; border: 1px solid rgba(192,57,43,0.2); }
+    .auth-message.success { background: rgba(42,124,111,0.1); color: #2A7C6F; border: 1px solid rgba(42,124,111,0.2); }
+    .auth-message.show    { display: flex; }
+
+    /* Progress steps indicator */
+    .auth-steps {
+      display: flex; align-items: center; gap: 0; margin-bottom: 36px;
+    }
+    .auth-step-item {
+      display: flex; flex-direction: column; align-items: center; gap: 6px; flex: 1;
+    }
+    .auth-step-circle {
+      width: 32px; height: 32px; border-radius: 50%; border: 2px solid #F0E9DE;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.78rem; font-weight: 700; color: #9B7B63;
+      background: #fff; transition: all 0.3s; position: relative; z-index: 1;
+    }
+    .auth-step-item.active .auth-step-circle  { border-color: #B5552B; color: #B5552B; background: rgba(181,85,43,0.08); }
+    .auth-step-item.done .auth-step-circle    { border-color: #2A7C6F; background: #2A7C6F; color: #fff; }
+    .auth-step-label { font-size: 0.72rem; color: #9B7B63; text-align: center; }
+    .auth-step-item.active .auth-step-label  { color: #B5552B; font-weight: 600; }
+    .auth-step-item.done .auth-step-label    { color: #2A7C6F; }
+    .auth-step-connector { flex: 1; height: 2px; background: #F0E9DE; margin-bottom: 18px; transition: background 0.3s; }
+    .auth-step-connector.done { background: #2A7C6F; }
+
+    .terms-check {
+      display: flex; align-items: flex-start; gap: 10px; margin-bottom: 20px;
+      font-size: 0.84rem; color: #6B4C35;
+    }
+    .terms-check input { width: 16px; height: 16px; accent-color: #B5552B; margin-top: 1px; flex-shrink: 0; }
+    .terms-check a { color: #B5552B; text-decoration: none; }
+
+    @media (max-width: 768px) {
+      .auth-page { grid-template-columns: 1fr; }
+      .auth-visual { display: none; }
+      .auth-form-panel { padding: 32px 24px; min-height: 100vh; }
+    }
+  </style>
+</head>
+<body>
+
+<a href="#signup-step-1" class="skip-nav" style="position:absolute;left:-9999px;top:4px;z-index:9999;background:#B5552B;color:#fff;padding:8px 16px;border-radius:8px;font-size:0.9rem;text-decoration:none;">Skip to form</a>
+
+<main class="auth-page" role="main">
+
+  <!-- ═══ LEFT ═══ -->
+  <aside class="auth-visual" aria-hidden="true">
+    <div class="auth-circle auth-circle-1"></div>
+    <div class="auth-circle auth-circle-2"></div>
+    <div class="auth-visual-content">
+      <img src="cascara_logo.png" alt="Cascara India" class="auth-logo" />
+      <h2>Join the <em>Cascara</em> Community</h2>
+      <p>Sign up and become part of India's most exciting artisan beverage movement.</p>
+      <div class="auth-perks">
+        <div class="auth-perk">
+          <span class="auth-perk-icon">🎁</span>
+          <span>Get 10% off your first order</span>
+        </div>
+        <div class="auth-perk">
+          <span class="auth-perk-icon">📬</span>
+          <span>Free shipping on orders above ₹500</span>
+        </div>
+        <div class="auth-perk">
+          <span class="auth-perk-icon">☕</span>
+          <span>Brew tips &amp; recipes in your inbox</span>
+        </div>
+      </div>
+    </div>
+    <div class="auth-visual-bottom">© 2025 Cascara India · FSSAI Licensed</div>
+  </aside>
+
+  <!-- ═══ RIGHT — Signup Form ═══ -->
+  <section class="auth-form-panel">
+    <div class="auth-form-box">
+      <div class="auth-form-header">
+        <h1>Create Account</h1>
+        <p>Already have one? <a href="login.html">Sign in →</a></p>
+      </div>
+
+      <!-- Progress Steps -->
+      <div class="auth-steps" id="auth-steps">
+        <div class="auth-step-item active" id="step-1-indicator">
+          <div class="auth-step-circle">1</div>
+          <span class="auth-step-label">Details</span>
+        </div>
+        <div class="auth-step-connector" id="step-connector"></div>
+        <div class="auth-step-item" id="step-2-indicator">
+          <div class="auth-step-circle">2</div>
+          <span class="auth-step-label">Verify</span>
+        </div>
+      </div>
+
+      <!-- Message Banner -->
+      <div class="auth-message" id="auth-message" role="alert" aria-live="polite">
+        <span id="auth-message-icon">⚠️</span>
+        <span id="auth-message-text"></span>
+      </div>
+
+      <!-- ── STEP 1: Account Details ── -->
+      <div id="signup-step-1" class="signup-step">
+        <form id="signup-form" novalidate autocomplete="on">
+
+          <div class="auth-input-group">
+            <label for="signup-name">Full Name</label>
+            <div class="auth-input-wrap">
+              <span class="input-icon">👤</span>
+              <input type="text" id="signup-name" name="name"
+                placeholder="e.g. Priya Sharma" required minlength="2" autocomplete="name" />
+            </div>
+          </div>
+
+          <div class="auth-input-group">
+            <label for="signup-email">Email Address</label>
+            <div class="auth-input-wrap">
+              <span class="input-icon">✉️</span>
+              <input type="email" id="signup-email" name="email"
+                placeholder="your@email.com" required autocomplete="email" />
+            </div>
+          </div>
+
+          <div class="auth-input-group">
+            <label for="signup-password">Password</label>
+            <div class="auth-input-wrap">
+              <span class="input-icon">🔒</span>
+              <input type="password" id="signup-password" name="password"
+                placeholder="Min. 6 characters" required minlength="6" autocomplete="new-password" />
+              <button type="button" class="toggle-pass" id="toggle-pass-btn" aria-label="Toggle password visibility">👁</button>
+            </div>
+            <div class="pwd-strength-bar"><div class="pwd-strength-fill" id="pwd-bar"></div></div>
+            <span class="pwd-strength-label" id="pwd-label"></span>
+          </div>
+
+          <div class="terms-check">
+            <input type="checkbox" id="terms-agree" required />
+            <label for="terms-agree">I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></label>
+          </div>
+
+          <button type="submit" class="auth-btn" id="signup-btn">
+            <span class="btn-text">Create Account →</span>
+            <div class="btn-spinner"></div>
+          </button>
+        </form>
+      </div>
+
+      <!-- ── STEP 2: OTP Verification ── -->
+      <div id="signup-step-2" class="signup-step otp-step">
+        <div style="text-align:center;margin-bottom:24px;">
+          <div style="font-size:3rem;margin-bottom:12px;">📬</div>
+          <p style="color:#3D2614;font-size:1rem;font-weight:500;">We've sent a 6-digit OTP to</p>
+          <p style="color:#B5552B;font-weight:700;font-size:1.05rem;" id="otp-email-display"></p>
+          <p style="color:#9B7B63;font-size:0.88rem;margin-top:6px;">Check your inbox (and spam folder).</p>
+        </div>
+
+        <div class="otp-inputs" id="otp-inputs">
+          <input class="otp-digit" type="text" maxlength="1" inputmode="numeric" pattern="[0-9]" id="otp-0" aria-label="OTP digit 1" />
+          <input class="otp-digit" type="text" maxlength="1" inputmode="numeric" pattern="[0-9]" id="otp-1" aria-label="OTP digit 2" />
+          <input class="otp-digit" type="text" maxlength="1" inputmode="numeric" pattern="[0-9]" id="otp-2" aria-label="OTP digit 3" />
+          <input class="otp-digit" type="text" maxlength="1" inputmode="numeric" pattern="[0-9]" id="otp-3" aria-label="OTP digit 4" />
+          <input class="otp-digit" type="text" maxlength="1" inputmode="numeric" pattern="[0-9]" id="otp-4" aria-label="OTP digit 5" />
+          <input class="otp-digit" type="text" maxlength="1" inputmode="numeric" pattern="[0-9]" id="otp-5" aria-label="OTP digit 6" />
+        </div>
+
+        <button class="auth-btn" id="verify-btn" onclick="verifyOtp()" type="button">
+          <span class="btn-text">Verify & Activate →</span>
+          <div class="btn-spinner"></div>
+        </button>
+
+        <div class="resend-otp">
+          Didn't receive it? <button type="button" id="resend-btn" onclick="resendOtp()">Resend OTP</button>
+          <span id="resend-timer"></span>
+        </div>
+
+        <div style="text-align:center;margin-top:16px;">
+          <button onclick="goBack()" type="button" style="background:none;border:none;color:#9B7B63;font-size:0.85rem;cursor:pointer;font-family:inherit;">← Back to details</button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<script>
+  const IS_LOCAL = ['localhost','127.0.0.1'].includes(window.location.hostname) || window.location.protocol === 'file:';
+  const API = IS_LOCAL ? 'http://localhost:5000/api' : '/api';
+  let signupEmail = '';
+  let resendCooldown = null;
+
+  /* ── Redirect if already logged in ── */
+  (function() {
+    if (localStorage.getItem('cascara-token')) {
+      window.location.href = 'index.html';
+    }
+  })();
+
+  /* ── Password Toggle ── */
+  document.getElementById('toggle-pass-btn').addEventListener('click', function() {
+    const inp = document.getElementById('signup-password');
+    const show = inp.type === 'password';
+    inp.type = show ? 'text' : 'password';
+    this.textContent = show ? '🙈' : '👁';
+  });
+
+  /* ── Password Strength ── */
+  document.getElementById('signup-password').addEventListener('input', function() {
+    const val = this.value;
+    const bar = document.getElementById('pwd-bar');
+    const lbl = document.getElementById('pwd-label');
+    let strength = 0;
+    if (val.length >= 6)  strength++;
+    if (val.length >= 10) strength++;
+    if (/[A-Z]/.test(val)) strength++;
+    if (/[0-9]/.test(val)) strength++;
+    if (/[^a-zA-Z0-9]/.test(val)) strength++;
+    const levels = [
+      { w:'0%',   bg:'#F0E9DE', t:'' },
+      { w:'20%',  bg:'#c0392b', t:'Weak' },
+      { w:'40%',  bg:'#e67e22', t:'Fair' },
+      { w:'60%',  bg:'#f1c40f', t:'Good' },
+      { w:'80%',  bg:'#2ecc71', t:'Strong' },
+      { w:'100%', bg:'#2A7C6F', t:'Very Strong' }
+    ];
+    const l = levels[strength] || levels[0];
+    bar.style.width = l.w;
+    bar.style.background = l.bg;
+    lbl.textContent = l.t;
+    lbl.style.color = l.bg;
+  });
+
+  /* ── Show message ── */
+  function showMessage(text, type = 'error') {
+    const el = document.getElementById('auth-message');
+    document.getElementById('auth-message-icon').textContent = type === 'error' ? '⚠️' : '✅';
+    document.getElementById('auth-message-text').textContent = text;
+    el.className = `auth-message show ${type}`;
+  }
+
+  /* ── Signup Submit ── */
+  document.getElementById('signup-form').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const btn   = document.getElementById('signup-btn');
+    const name  = document.getElementById('signup-name').value.trim();
+    const email = document.getElementById('signup-email').value.trim();
+    const pass  = document.getElementById('signup-password').value;
+    const terms = document.getElementById('terms-agree').checked;
+
+    if (!name || !email || !pass) return showMessage('Please fill in all fields.', 'error');
+    if (!terms) return showMessage('You must agree to the Terms of Service.', 'error');
+    if (pass.length < 6)  return showMessage('Password must be at least 6 characters.', 'error');
+
+    btn.classList.add('loading'); btn.disabled = true;
+
+    try {
+      const res  = await fetch(`${API}/auth/signup`, {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, password: pass })
+      });
+      const data = await res.json();
+
+      if (!res.ok) return showMessage(data.message || 'Signup failed.', 'error');
+
+      signupEmail = email;
+      document.getElementById('otp-email-display').textContent = email;
+
+      // Transition to OTP step
+      document.getElementById('signup-step-1').style.display = 'none';
+      document.getElementById('signup-step-2').classList.add('active');
+      document.getElementById('step-1-indicator').className = 'auth-step-item done';
+      document.getElementById('step-1-indicator').querySelector('.auth-step-circle').textContent = '✓';
+      document.getElementById('step-connector').classList.add('done');
+      document.getElementById('step-2-indicator').className = 'auth-step-item active';
+
+      // Clear the message
+      document.getElementById('auth-message').className = 'auth-message';
+
+      // Focus first OTP digit
+      setTimeout(() => document.getElementById('otp-0').focus(), 100);
+
+      // Start resend timer
+      startResendTimer(60);
+
+    } catch (err) {
+      showMessage('Cannot connect to server. Please ensure the backend is running.', 'error');
+    } finally {
+      btn.classList.remove('loading'); btn.disabled = false;
+    }
+  });
+
+  /* ── OTP Input Auto-focus ── */
+  document.querySelectorAll('.otp-digit').forEach((inp, idx, arr) => {
+    inp.addEventListener('input', function() {
+      const val = this.value.replace(/[^0-9]/g,'');
+      this.value = val.slice(-1);
+      if (val && idx < arr.length - 1) arr[idx + 1].focus();
+      this.classList.toggle('filled', !!this.value);
+    });
+    inp.addEventListener('keydown', function(e) {
+      if (e.key === 'Backspace' && !this.value && idx > 0) arr[idx - 1].focus();
+      if (e.key === 'v' && (e.ctrlKey || e.metaKey)) {
+        setTimeout(() => {
+          const pasted = this.value.replace(/[^0-9]/g,'');
+          if (pasted.length > 1) {
+            [...pasted].forEach((ch, i) => { if (arr[idx + i]) { arr[idx + i].value = ch; arr[idx + i].classList.add('filled'); } });
+          }
+        }, 10);
+      }
+    });
+    inp.addEventListener('paste', function(e) {
+      e.preventDefault();
+      const pasted = (e.clipboardData || window.clipboardData).getData('text').replace(/[^0-9]/g,'');
+      [...pasted].forEach((ch, i) => { if (arr[i]) { arr[i].value = ch; arr[i].classList.add('filled'); } });
+      arr[Math.min(pasted.length, arr.length - 1)].focus();
+    });
+  });
+
+  function getOtpValue() {
+    return Array.from(document.querySelectorAll('.otp-digit')).map(i => i.value).join('');
+  }
+
+  /* ── Verify OTP ── */
+  async function verifyOtp() {
+    const btn = document.getElementById('verify-btn');
+    const otp = getOtpValue();
+
+    if (otp.length !== 6) return showMessage('Please enter the complete 6-digit OTP.', 'error');
+
+    btn.classList.add('loading'); btn.disabled = true;
+
+    try {
+      const res  = await fetch(`${API}/auth/verify-otp`, {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: signupEmail, otp })
+      });
+      const data = await res.json();
+
+      if (!res.ok) return showMessage(data.message || 'Verification failed.', 'error');
+
+      // Store auth
+      if (data.token) {
+        localStorage.setItem('cascara-token', data.token);
+        localStorage.setItem('cascara-user', JSON.stringify(data.user));
+      }
+
+      showMessage('🎉 Account created! Welcome to Cascara India. Redirecting...', 'success');
+      clearInterval(resendCooldown);
+      setTimeout(() => { window.location.href = 'index.html'; }, 1500);
+
+    } catch {
+      showMessage('Server error. Please try again.', 'error');
+    } finally {
+      btn.classList.remove('loading'); btn.disabled = false;
+    }
+  }
+
+  /* ── Resend OTP ── */
+  async function resendOtp() {
+    const btn = document.getElementById('resend-btn');
+    btn.disabled = true;
+
+    try {
+      const name  = document.getElementById('signup-name').value.trim();
+      const pass  = document.getElementById('signup-password').value;
+      await fetch(`${API}/auth/signup`, {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email: signupEmail, password: pass })
+      });
+      showMessage('OTP resent! Please check your inbox.', 'success');
+      startResendTimer(60);
+    } catch {
+      showMessage('Could not resend OTP. Try again.', 'error');
+      btn.disabled = false;
+    }
+  }
+
+  /* ── Resend Timer ── */
+  function startResendTimer(seconds) {
+    const btn   = document.getElementById('resend-btn');
+    const timer = document.getElementById('resend-timer');
+    btn.disabled = true;
+    let s = seconds;
+    clearInterval(resendCooldown);
+    resendCooldown = setInterval(() => {
+      timer.textContent = ` (${s}s)`;
+      s--;
+      if (s < 0) {
+        clearInterval(resendCooldown);
+        btn.disabled = false;
+        timer.textContent = '';
+      }
+    }, 1000);
+  }
+
+  function goBack() {
+    document.getElementById('signup-step-1').style.display = '';
+    document.getElementById('signup-step-2').classList.remove('active');
+    document.getElementById('step-1-indicator').className = 'auth-step-item active';
+    document.getElementById('step-1-indicator').querySelector('.auth-step-circle').textContent = '1';
+    document.getElementById('step-connector').classList.remove('done');
+    document.getElementById('step-2-indicator').className = 'auth-step-item';
+    document.getElementById('auth-message').className = 'auth-message';
+    clearInterval(resendCooldown);
+  }
+</script>
+</body>
+</html>

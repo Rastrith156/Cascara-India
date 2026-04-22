@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Orders | Cascara India – Premium Coffee Husk Tea</title>
+  <meta name="description" content="View your Cascara India order history." />
+  <meta name="robots" content="noindex,nofollow" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body { padding-top: 90px; }
+
+    .orders-page { max-width: 860px; margin: 0 auto; padding: 40px 20px 80px; }
+
+    .orders-page h1 {
+      font-family: var(--font-heading);
+      font-size: clamp(1.8rem, 4vw, 2.4rem);
+      color: var(--text-heading);
+      margin-bottom: 8px;
+    }
+    .orders-subtitle { color: var(--text-body); margin-bottom: 36px; font-size: 0.95rem; }
+
+    /* Guest email lookup */
+    .guest-lookup {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 28px 28px;
+      margin-bottom: 32px;
+    }
+    .guest-lookup h3 { font-family: var(--font-heading); color: var(--accent); margin-bottom: 6px; font-size: 1.2rem; }
+    .guest-lookup p { font-size: 0.88rem; color: var(--text-body); margin-bottom: 16px; }
+    .lookup-row { display: flex; gap: 12px; }
+    .lookup-row input {
+      flex: 1;
+      padding: 11px 16px;
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      font-family: var(--font-body, 'Inter', sans-serif);
+      font-size: 0.92rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .lookup-row input:focus { border-color: var(--accent); }
+    .lookup-row button {
+      padding: 11px 22px;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: opacity 0.2s;
+      white-space: nowrap;
+    }
+    .lookup-row button:hover { opacity: 0.88; }
+
+    /* Order cards */
+    .orders-list { display: flex; flex-direction: column; gap: 20px; }
+
+    .order-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+      transition: box-shadow 0.2s;
+    }
+    .order-card:hover { box-shadow: 0 6px 24px rgba(0,0,0,0.08); }
+
+    .order-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 24px;
+      border-bottom: 1px solid var(--border);
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .order-id { font-weight: 700; font-size: 0.82rem; color: var(--text-body); font-family: monospace; }
+    .order-date { font-size: 0.82rem; color: var(--text-body); }
+
+    .order-status {
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .status-pending    { background: #fff8e1; color: #f57c00; }
+    .status-confirmed  { background: #e8f5e9; color: #2e7d32; }
+    .status-processing { background: #e3f2fd; color: #1565c0; }
+    .status-shipped    { background: #ede7f6; color: #4527a0; }
+    .status-delivered  { background: #e8f5e9; color: #1b5e20; }
+    .status-cancelled  { background: #fce4ec; color: #b71c1c; }
+
+    .order-card-body { padding: 20px 24px; }
+
+    .order-items-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .order-item-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.9rem;
+      color: var(--text-body);
+    }
+    .order-item-name { font-weight: 500; color: var(--text-heading); }
+
+    .order-card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 24px;
+      border-top: 1px solid var(--border);
+      background: rgba(0,0,0,0.015);
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .order-total { font-weight: 700; font-size: 1rem; color: var(--accent); }
+    .order-address { font-size: 0.8rem; color: var(--text-body); }
+
+    /* States */
+    .orders-loading { text-align: center; padding: 60px 20px; color: var(--text-body); }
+    .orders-loading .spinner {
+      width: 40px; height: 40px;
+      border: 3px solid var(--border);
+      border-top-color: var(--accent);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin: 0 auto 16px;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .orders-empty {
+      text-align: center; padding: 60px 20px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+    }
+    .orders-empty .empty-icon { font-size: 3rem; margin-bottom: 12px; }
+    .orders-empty h3 { color: var(--text-heading); margin-bottom: 8px; }
+    .orders-empty p { color: var(--text-body); font-size: 0.92rem; margin-bottom: 20px; }
+
+    .login-prompt {
+      background: linear-gradient(135deg, #FAF6F0, #f0e9de);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 32px;
+      text-align: center;
+      margin-bottom: 24px;
+    }
+    .login-prompt h3 { font-family: var(--font-heading); color: var(--accent); margin-bottom: 8px; }
+    .login-prompt p  { color: var(--text-body); font-size: 0.92rem; margin-bottom: 20px; }
+  </style>
+</head>
+<body>
+
+  <!-- NAVIGATION -->
+  <nav class="navbar always-dark scrolled" id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">
+        <img src="cascara_logo.png" alt="Cascara India Logo" id="logo-img" />
+      </a>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="index.html#about" class="nav-link">Our Story</a></li>
+        <li><a href="products.html" class="nav-link">Products</a></li>
+        <li><a href="brew.html" class="nav-link">How to Brew</a></li>
+        <li><a href="reviews.html" class="nav-link">Reviews</a></li>
+        <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+      </ul>
+      <div class="nav-actions" id="nav-actions-wrap">
+        <button id="hamburger" class="hamburger" aria-label="Menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- MAIN CONTENT -->
+  <main class="orders-page">
+    <h1>📦 My Orders</h1>
+    <p class="orders-subtitle">Track and review all your Cascara India orders.</p>
+
+    <!-- Guest email lookup (shown when NOT logged in) -->
+    <div class="guest-lookup" id="guest-lookup" style="display:none;">
+      <h3>🔍 Find Your Orders</h3>
+      <p>Enter the email address you used during checkout to view your order history.</p>
+      <div class="lookup-row">
+        <input type="email" id="lookup-email" placeholder="your@email.com" />
+        <button onclick="lookupByEmail()">Search Orders</button>
+      </div>
+    </div>
+
+    <!-- Login prompt (shown when not logged in and no search yet) -->
+    <div class="login-prompt" id="login-prompt">
+      <h3>Sign in to view your orders</h3>
+      <p>Logged-in members can see their full order history instantly. Or search by email below.</p>
+      <a href="login.html" class="btn btn-primary">Sign In</a>
+      &nbsp;
+      <button onclick="document.getElementById('guest-lookup').style.display='block';document.getElementById('login-prompt').style.display='none';"
+        class="btn" style="background:transparent;border:1.5px solid var(--accent);color:var(--accent);padding:12px 24px;border-radius:8px;cursor:pointer;font-weight:600;">
+        Search by Email
+      </button>
+    </div>
+
+    <!-- Orders List -->
+    <div id="orders-container"></div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <img src="cascara_logo.png" alt="Cascara India" class="footer-logo" />
+          <p>India's first premium coffee husk tea brand.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="products.html">Products</a></li>
+            <li><a href="checkout.html">Checkout</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2025 Cascara India. All rights reserved. Made with ❤️ in India.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+  <script>
+    const IS_LOCAL = ['localhost','127.0.0.1'].includes(window.location.hostname)
+                  || window.location.protocol === 'file:';
+    const API = IS_LOCAL ? 'http://localhost:5000/api' : '/api';
+
+    const ordersContainer = document.getElementById('orders-container');
+
+    /* ── Format date ── */
+    function formatDate(iso) {
+      if (!iso) return '';
+      return new Date(iso).toLocaleDateString('en-IN', {
+        day: 'numeric', month: 'short', year: 'numeric',
+        hour: '2-digit', minute: '2-digit'
+      });
+    }
+
+    /* ── Status badge class ── */
+    function statusClass(s) {
+      const map = { pending:'pending', confirmed:'confirmed', processing:'processing',
+                    shipped:'shipped', delivered:'delivered', cancelled:'cancelled' };
+      return 'order-status status-' + (map[s] || 'pending');
+    }
+
+    /* ── Render orders array ── */
+    function renderOrders(orders) {
+      if (!orders || orders.length === 0) {
+        ordersContainer.innerHTML = `
+          <div class="orders-empty">
+            <div class="empty-icon">🛍️</div>
+            <h3>No orders found</h3>
+            <p>You haven't placed any orders yet, or no orders match this email.</p>
+            <a href="products.html" class="btn btn-primary">Start Shopping</a>
+          </div>`;
+        return;
+      }
+
+      ordersContainer.innerHTML = `<div class="orders-list">${orders.map(o => `
+        <div class="order-card">
+          <div class="order-card-header">
+            <div>
+              <div class="order-id">Order #${o._id}</div>
+              <div class="order-date">${formatDate(o.createdAt)}</div>
+            </div>
+            <span class="${statusClass(o.status)}">${o.status || 'pending'}</span>
+          </div>
+          <div class="order-card-body">
+            <ul class="order-items-list">
+              ${(o.items || []).map(item => `
+                <li class="order-item-row">
+                  <span class="order-item-name">${item.qty}× ${item.name}</span>
+                  <span>₹${(item.price * item.qty).toLocaleString('en-IN')}</span>
+                </li>`).join('')}
+            </ul>
+          </div>
+          <div class="order-card-footer">
+            <div>
+              <div class="order-total">Total: ₹${(o.total || 0).toLocaleString('en-IN')}</div>
+              <div class="order-address">📍 ${[o.address, o.city, o.pincode].filter(Boolean).join(', ')}</div>
+            </div>
+            <div style="font-size:0.8rem;color:var(--text-body);">
+              💳 ${o.paymentMethod || 'card'}
+            </div>
+          </div>
+        </div>`).join('')}</div>`;
+    }
+
+    /* ── Show loading spinner ── */
+    function showLoading() {
+      ordersContainer.innerHTML = `
+        <div class="orders-loading">
+          <div class="spinner"></div>
+          <p>Fetching your orders...</p>
+        </div>`;
+    }
+
+    /* ── Show error ── */
+    function showError(msg) {
+      ordersContainer.innerHTML = `
+        <div class="orders-empty">
+          <div class="empty-icon">⚠️</div>
+          <h3>Could not load orders</h3>
+          <p>${msg}</p>
+        </div>`;
+    }
+
+    /* ── Fetch orders for logged-in user ── */
+    async function loadMyOrders(token) {
+      showLoading();
+      try {
+        const res = await fetch(`${API}/orders/my`, {
+          headers: { 'Authorization': `Bearer ${token}` }
+        });
+        if (res.status === 401) { showError('Session expired. Please sign in again.'); return; }
+        const data = await res.json();
+        renderOrders(Array.isArray(data) ? data : data.orders || []);
+      } catch(e) {
+        showError('Could not connect to backend. Make sure the server is running.');
+      }
+    }
+
+    /* ── Guest: look up by email ── */
+    async function lookupByEmail() {
+      const email = document.getElementById('lookup-email').value.trim();
+      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        alert('Please enter a valid email address.');
+        return;
+      }
+      showLoading();
+      try {
+        // Fetch all orders then filter client-side by email
+        // (backend doesn't expose public email-search to avoid data leaks,
+        //  so we try the /my endpoint if we have a token, else show a friendly message)
+        const res = await fetch(`${API}/orders/by-email?email=${encodeURIComponent(email)}`);
+        if (res.ok) {
+          const data = await res.json();
+          renderOrders(Array.isArray(data) ? data : data.orders || []);
+        } else {
+          // Backend doesn't have this route yet — show tip
+          ordersContainer.innerHTML = `
+            <div class="orders-empty">
+              <div class="empty-icon">🔐</div>
+              <h3>Sign in to view orders</h3>
+              <p>For security, order history is only accessible to signed-in members.<br>
+                 Please <a href="login.html" style="color:var(--accent);font-weight:600;">sign in</a> or
+                 <a href="signup.html" style="color:var(--accent);font-weight:600;">create an account</a> with the same email you used at checkout.</p>
+              <a href="login.html" class="btn btn-primary" style="margin-top:12px;">Sign In</a>
+            </div>`;
+        }
+      } catch(e) {
+        showError('Could not connect to backend. Make sure the server is running.');
+      }
+    }
+
+    /* ═══════════════════════════════
+       INIT
+       ═══════════════════════════════ */
+    (function init() {
+      const token = localStorage.getItem('cascara-token');
+
+      if (token) {
+        // Logged in — hide prompts, load orders directly
+        document.getElementById('login-prompt').style.display  = 'none';
+        document.getElementById('guest-lookup').style.display  = 'none';
+        loadMyOrders(token);
+      } else {
+        // Not logged in — show login prompt
+        document.getElementById('login-prompt').style.display  = 'block';
+        document.getElementById('guest-lookup').style.display  = 'none';
+      }
+    })();
+  </script>
+</body>
+</html>
